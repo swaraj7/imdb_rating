@@ -20,6 +20,7 @@ main() {
       | grep "user rating" \
       | grep "[0-9]\+\.[0-9]\+" -o)
     f_reviews=${all_reviews:0:3}
+    f_name=$(echo ${f_name//+/" "})
     echo $f_reviews $f_name
   done | sort -k1 -rn
 }
