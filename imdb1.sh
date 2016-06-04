@@ -15,7 +15,7 @@ main() {
     f_name=$(echo ${f_name//_/+})
     f_name=$(echo ${f_name// /+})
     movie_id=$(find_movies_id $f_name)
-    all_reviews=$(curl-s http://www.imdb.com/title/$movie_id/ \
+    all_reviews=$(curl -s http://www.imdb.com/title/$movie_id/ \
       | grep "based on" \
       | grep "user rating" \
       | grep "[0-9]\+\.[0-9]\+" -o)
