@@ -2,7 +2,7 @@ imdb1.sh is a script to get rating of movies or tv series from imdb.com
 
 ## How to use
 <br> 
-  <b>  bash imdb1.sh <path to movies directory> </b>
+  <b>  bash imdb1.sh \<path to movie directory> 
 <br>
 <br>
 
