@@ -15,7 +15,7 @@ movie_id=${all_ids:1:9}
 
 curl http://www.imdb.com/title/$movie_id/ > rating.html
 
-reviews=$(grep "based on" rating.html 
+reviews=$(grep "based on" rating.html \
   |grep "user ratings" \
   | grep "[0-9]\.[0-9]" -o)
 
