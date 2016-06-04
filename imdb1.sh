@@ -1,16 +1,11 @@
 #!/bin/bash
 
-
-
 find_movies_id() {
   all_ids=$(curl -s http://www.imdb.com/find\?ref_\=nv_sr_fn\&q\=$1\&s\=all \
     | grep -E -0 '/tt\w+' -o)
-  
   movie=${all_ids:1:9}
-
   echo $movie
 }
-
 
 main() {
   for file in $1/*
