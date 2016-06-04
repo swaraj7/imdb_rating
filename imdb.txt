@@ -10,15 +10,12 @@ do
 
 
 
-curl http://www.imdb.com/find\?ref_\=nv_sr_fn\&q\=$f_name\&s\=all \
-  |grep -E -0  '/tt\w+' \
-  |cut -c72- >out.txt
+all_ids=$(curl http://www.imdb.com/find\?ref_\=nv_sr_fn\&q\=$f_name\&s\=all \
+  |grep -E -0  '/tt\w+' -o)
 
-cut -c-9 out.txt >finalid.txt
+movie_id=${all_ids:1:9}
 
-read name <finalid.txt
-
-curl http://www.imdb.com/title/$name/?ref_=fn_a1_tt_1 > rating.html
+curl http://www.imdb.com/title/$movie_id/ > rating.html
 
 
 #grep "based on" rating.html| grep "user ratings" |grep "[0-9]\.[0-9]" -o
