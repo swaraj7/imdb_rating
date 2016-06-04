@@ -1,0 +1,39 @@
+#!/bin/bash
+read search
+
+for file in $search/movies/*
+do 
+  full_name=${file##*/}       
+  f_name=$(echo ${full_name//./+})
+  f_name=$(echo ${f_name//_/+})
+  f_name=$(echo ${f_name// /+})
+
+
+
+curl http://www.imdb.com/find\?ref_\=nv_sr_fn\&q\=$f_name\&s\=all \
+  |grep -E -0  '/tt\w+' \
+  |cut -c72- >out.txt
+
+cut -c-9 out.txt >finalid.txt
+
+read name <finalid.txt
+
+curl http://www.imdb.com/title/$name/?ref_=fn_a1_tt_1 > rating.html
+
+
+#grep "based on" rating.html| grep "user ratings" |grep "[0-9]\.[0-9]" -o
+
+reviews=$(grep "based on" rating.html |grep "user ratings" \
+   | grep "[0-9]\.[0-9]" -o)
+
+f_reviews=${reviews:0:3} 
+#echo $f_reviews
+
+
+echo $f_reviews $f_name >>f_record.txt
+
+done
+#end of for loop
+
+
+sort f_record.txt -o f_record.txt
