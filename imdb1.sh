@@ -20,6 +20,8 @@ main() {
     f_name=$(echo ${f_name//_/+})
     f_name=$(echo ${f_name// /+})
     movie_id=$(find_movies_id $f_name)
+    touch /tmp/rating.html
+    touch /tmp/f_record.txt
     curl -s http://www.imdb.com/title/$movie_id/ > rating.html
     reviews=$(grep "based on" rating.html \
       |grep "user ratings" \
